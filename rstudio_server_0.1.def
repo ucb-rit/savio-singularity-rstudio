@@ -1,0 +1,22 @@
+Bootstrap: docker
+From: rocker/rstudio
+
+%post
+
+        mkdir -p /global/scratch
+        mkdir -p /global/home/users
+
+%environment
+
+# this runscript by default doesn't require authentication but still
+# allows one to use
+# PASSWORD=foo singularity run /path/to/file.img --auth-pam-helper-path /usr/lib/rstudio-server/bin/pam-helper --auth-none 0
+
+%runscript
+    /usr/lib/rstudio-server/bin/rserver "$@"
+
+# can't get instance.start to work either with or without authentication
+%startscript
+    /usr/lib/rstudio-server/bin/rserver
+
+
