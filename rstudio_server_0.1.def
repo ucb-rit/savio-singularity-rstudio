@@ -15,7 +15,6 @@ From: rocker/rstudio
 %runscript
     /usr/lib/rstudio-server/bin/rserver "$@"
 
-# can't get instance.start to work either with or without authentication
 %startscript
     /usr/lib/rstudio-server/bin/rserver
 
