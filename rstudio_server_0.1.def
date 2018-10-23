@@ -2,7 +2,6 @@ Bootstrap: docker
 From: rocker/rstudio
 
 %post
-
         mkdir -p /global/scratch
         mkdir -p /global/home/users
 
