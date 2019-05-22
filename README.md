@@ -11,11 +11,11 @@ This repository provides the materials needed to create a Singularity container 
 
   1) Execute the following via `srun` or `sbatch`:
   
-     ```singularity run rstudio_server_0.2.img```
+     ```singularity run rstudio_server_0.3.img```
   2) Note the name of the Savio node, e.g., `n0070.savio2` on which the job started.
   3) Login to the Savio visualization node, start a vncserver session, and connect to a VNC Viewer window (i.e., a remote desktop session) following [these instructions](https://research-it.berkeley.edu/services/high-performance-computing/using-brc-visualization-node-realvnc).
   4) From a terminal in the remote desktop session run the following (changing `n0070.savio2 as needed` to the node from step 2):
-     - `/global/scratch/kmuriki/firefox http://n0070.savio2:8787`
+     - `firefox http://n0070.savio2:8787`
   5) When you are done with RStudio, make sure to kill your `srun` or `sbatch` session so you are not charged for time you don't need.
  
 Note that it's possible another user could connect to your RStudio session if you don't use authentication. 
@@ -24,18 +24,39 @@ Note that it's possible another user could connect to your RStudio session if yo
 
   1) Execute the following via `srun` or `sbatch`, setting the password (here 'foo') to whatever you desire:
   
-     ```PASSWORD=foo singularity run rstudio_server_0.2.img --auth-pam-helper-path /usr/lib/rstudio-server/bin/pam-helper --auth-none 0```
+     ```PASSWORD=foo singularity run rstudio_server_0.3.img --auth-pam-helper-path /usr/lib/rstudio-server/bin/pam-helper --auth-none 0```
   2) Note the name of the Savio node, e.g., `n0070.savio2` on which the job started.
   3) Login to the Savio visualization node, start a vncserver session, and connect to a VNC Viewer window (i.e., a remote desktop session) following [these instructions](https://research-it.berkeley.edu/services/high-performance-computing/using-brc-visualization-node-realvnc).
   4) From a terminal in the remote desktop session run the following (changing `n0070.savio2 as needed` to the node from step 2):
-     - `/global/scratch/kmuriki/firefox http://n0070.savio2:8787`
+     - `firefox http://n0070.savio2:8787`
   5) Authenticate with RStudio using your Savio username and the password you entered in step 1.
   6) When you are done with RStudio, make sure to kill your `srun` or `sbatch` session so you are not charged for time you don't need.
+
+### Adding R packages to your container
+
+While one could add additional R packages to the container itself, the easiest thing to do as a user is to install additional packages outside the container, which is easy to do because Singularity automatically gives you access to files on the host system.
+
+One possibility is to simply use `install.packages` inside the container. That will likely install into the `R` subdirectory of your home directory on the host system. This might be fine but runs the risk of conflicting with R packages that you've installed for use on the host system.
+
+Here's an alternative that isolates the additional packages in a directory:
+
+```
+export SING_R_DIR=~/singularity_R
+mkdir ${SING_R_DIR}
+SINGULARITYENV_R_LIBS_USER=${SING_R_DIR} singularity exec  \
+   rstudio_server_0.3.img Rscript -e "install.packages(c('assertthat', 'testthat'))"
+```
+
+Now when you want to run R inside the container, make sure to set `SINGULARITYENV_R_LIBS_USER` (which sets `R_LIBS_USER` inside the container, such that R knows where to find the packages you've just installed), for example:
+
+```
+SINGULARITYENV_R_LIBS_USER=${SING_R_DIR} singularity run rstudio_server_0.3.img
+```
 
 ## To build the container
 
 ```
-sudo singularity build /tmp/rstudio_server_0.2.img rstudio_server_0.2.def
+sudo singularity build /tmp/rstudio_server_0.3.img rstudio_server_0.3.def
 ```
 
 Notes:
