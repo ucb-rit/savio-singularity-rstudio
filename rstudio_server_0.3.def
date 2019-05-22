@@ -3,7 +3,7 @@ From: rocker/rstudio
 
 %post
         sed -i "s/R_LIBS_USER='\/usr\/local\/lib\/R\/site-library'//" /usr/local/lib/R/etc/Renviron  # ensure that R_LIBS_USER set such that users can install packages in their home directory
-        sed -i "s/R_LIBS=/R_LIBS_SITE=//" /usr/local/lib/R/etc/Renviron  # ensure that R_LIBS_USER takes precedence
+        sed -i "s/R_LIBS=/R_LIBS_SITE=/" /usr/local/lib/R/etc/Renviron  # ensure that R_LIBS_USER takes precedence
         mkdir -p /global/scratch
         mkdir -p /global/home/users
 
