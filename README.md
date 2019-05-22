@@ -36,7 +36,7 @@ Note that it's possible another user could connect to your RStudio session if yo
 
 While one could add additional R packages to the container itself, the easiest thing to do as a user is to install additional packages outside the container, which is easy to do because Singularity automatically gives you access to files on the host system.
 
-One possibility is to simply use `install.packages` inside the container. That will likely install into the `R` subdirectory of your home directory on the host system. This might be fine but runs the risk of conflicting with R packages that you've installed for use on the host system.
+One possibility is to simply use `install.packages` inside the container. That will likely install into the `R` subdirectory of your home directory on the host system (if `~/R/x86_64-pc-linux-gnu-library/3.6` exists, where 3.6 in this case is the version of R being used). This might be fine but runs the risk of conflicting with R packages that you've installed for use on the host system.
 
 Here's an alternative that isolates the additional packages in a directory:
 
