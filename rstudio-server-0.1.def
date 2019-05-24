@@ -9,7 +9,7 @@ From: rocker/rstudio
 
 # this runscript by default doesn't require authentication but still
 # allows one to use
-# PASSWORD=foo singularity run /path/to/file.img --auth-pam-helper-path /usr/lib/rstudio-server/bin/pam-helper --auth-none 0
+# PASSWORD=foo singularity run /path/to/file.simg --auth-pam-helper-path /usr/lib/rstudio-server/bin/pam-helper --auth-none 0
 
 %runscript
     /usr/lib/rstudio-server/bin/rserver "$@"
