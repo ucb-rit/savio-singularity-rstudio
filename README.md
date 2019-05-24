@@ -24,7 +24,7 @@ Note that it's possible another user could connect to your RStudio session if yo
 
   1) Execute the following via `srun` or `sbatch`, setting the password (here 'foo') to whatever you desire:
   
-     ```PASSWORD=foo singularity run rstudio-server-0.3.img --auth-pam-helper-path /usr/lib/rstudio-server/bin/pam-helper --auth-none 0```
+     ```PASSWORD=foo singularity run rstudio-server-0.3.simg --auth-pam-helper-path /usr/lib/rstudio-server/bin/pam-helper --auth-none 0```
   2) Note the name of the Savio node, e.g., `n0070.savio2` on which the job started.
   3) Login to the Savio visualization node, start a vncserver session, and connect to a VNC Viewer window (i.e., a remote desktop session) following [these instructions](https://research-it.berkeley.edu/services/high-performance-computing/using-brc-visualization-node-realvnc).
   4) From a terminal in the remote desktop session run the following (changing `n0070.savio2 as needed` to the node from step 2):
@@ -44,19 +44,19 @@ Here's an alternative that isolates the additional packages in a directory:
 export SING_R_DIR=~/singularity_R
 mkdir ${SING_R_DIR}
 SINGULARITYENV_R_LIBS_USER=${SING_R_DIR} singularity exec  \
-   rstudio-server-0.3.img Rscript -e "install.packages(c('assertthat', 'testthat'))"
+   rstudio-server-0.3.simg Rscript -e "install.packages(c('assertthat', 'testthat'))"
 ```
 
 Now when you want to run R inside the container, make sure to set `SINGULARITYENV_R_LIBS_USER` (which sets `R_LIBS_USER` inside the container, such that R knows where to find the packages you've just installed), for example:
 
 ```
-SINGULARITYENV_R_LIBS_USER=${SING_R_DIR} singularity run rstudio-server-0.3.img
+SINGULARITYENV_R_LIBS_USER=${SING_R_DIR} singularity run rstudio-server-0.3.simg
 ```
 
 ## To build the container
 
 ```
-sudo singularity build /tmp/rstudio-server-0.3.img rstudio-server-0.3.def
+sudo singularity build /tmp/rstudio-server-0.3.simg rstudio-server-0.3.def
 ```
 
 Notes:
