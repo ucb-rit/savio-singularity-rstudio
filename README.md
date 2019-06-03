@@ -55,11 +55,20 @@ SINGULARITYENV_R_LIBS_USER=${SING_R_DIR} singularity run rstudio-server-0.3.simg
 
 ## To build the container
 
-Note that you need to have root (administrative) access to do this. 
+You'll need access to a machine where you have administrative privileges (i.e., 'root' access). 
+
 
 ```
 sudo singularity build /tmp/rstudio-server-0.3.simg rstudio-server-0.3.def
 ```
+
+Alternatively (i.e., without any special privileges), if you're using a newer version of Singularity, you may be able to build the container via Sylabs Cloud Remote Builder, like this:
+
+```
+singularity build --remote rstudio-server-0.3.simg rstudio-server-0.3.def
+```
+
+You'll need to create an account with Sylabs Cloud. More details are [here](https://www.sylabs.io/guides/3.1/user-guide/singularity_and_docker.html#building-containers-remotely).
 
 Notes:
 
