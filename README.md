@@ -38,7 +38,7 @@ While one could add additional R packages to the container itself, the easiest t
 
 One possibility is to simply use `install.packages` inside the container. That will likely install into the `R` subdirectory of your home directory on the host system (if `~/R/x86_64-pc-linux-gnu-library/3.6` exists, where 3.6 in this case is the version of R being used). This might be fine but runs the risk of conflicting with R packages that you've installed for use on the host system.
 
-Here's an alternative that isolates the additional packages in a directory:
+Here's an alternative that isolates the additional packages in a directory. In this example, we install the `assertthat` and `testthat` packages:
 
 ```
 export SING_R_DIR=~/singularity_R
@@ -51,6 +51,20 @@ Now when you want to run R inside the container, make sure to set `SINGULARITYEN
 
 ```
 SINGULARITYENV_R_LIBS_USER=${SING_R_DIR} singularity run rstudio-server-0.3.simg
+```
+
+### Using R without RStudio
+
+You can also use R without using the RStudio interface. For interactive use, after invoking `srun`, you just tell the Singularity container to run R, like this:
+
+```
+singularity exec rstudio-server-0.3.simg R
+```
+
+Similarly for a batch job via `sbatch`, you tell the Singularity container to run `R CMD BATCH`:
+
+```
+singularity exec rstudio-server-0.3.simg R CMD BATCH --no-save file.R file.Rout
 ```
 
 ## To build the container
