@@ -29,7 +29,7 @@ Note that it's possible another user could connect to your RStudio session if yo
   3) Login to the Savio visualization node, start a vncserver session, and connect to a VNC Viewer window (i.e., a remote desktop session) following [these instructions](https://research-it.berkeley.edu/services/high-performance-computing/using-brc-visualization-node-realvnc).
   4) From a terminal in the remote desktop session run the following (changing `n0070.savio2 as needed` to the node from step 2):
      - `firefox http://n0070.savio2:8787`
-  5) Authenticate with RStudio using your username (your SAvio username) and the password you entered in step 1.
+  5) Authenticate with RStudio using your username (your Savio username) and the password you entered in step 1.
   6) When you are done with RStudio, make sure to kill your `srun` or `sbatch` session so you are not charged for time you don't need.
 
 ### Adding R packages to your container
