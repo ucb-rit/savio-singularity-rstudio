@@ -9,11 +9,9 @@ This repository provides the materials needed to create a Singularity container 
 
 ### Using RStudio without authentication
 
-  1) Execute the following via `srun` or `sbatch`:
+  1) Start RStudio server on a compute node via `srun` or `sbatch`.  If you're using `srun`, start your interactive session via `srun` and then invoke the Singularity command below. If you're using `sbatch`, invoke Singularity command below within your submission script. 
   
      ```singularity run rstudio-server-0.3.simg```
-     
-     If you're using `srun`, start your interactive session via `srun` and then invoke Singularity. If you're using `sbatch`, invoke Singularity within your submission script. 
   2) Note the name of the Savio node, e.g., `n0070.savio2` on which the job started.
   3) Login to the Savio visualization node, start a vncserver session, and connect to a VNC Viewer window (i.e., a remote desktop session) following [these instructions](https://research-it.berkeley.edu/services/high-performance-computing/using-brc-visualization-node-realvnc).
   4) From a terminal in the remote desktop session run the following (changing `n0070.savio2` as needed to the node from step 2):
