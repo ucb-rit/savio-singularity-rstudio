@@ -24,7 +24,7 @@ Note that it's possible another user could connect to your RStudio session if yo
 
   1) Start RStudio server on a compute node via `srun` or `sbatch` as follows.  If you're using `srun`, start your interactive session via `srun` and then invoke the Singularity command below. If you're using `sbatch`, invoke Singularity command below within your submission script. You can set the password (here 'foo') to whatever you desire.
   
-     ```PASSWORD=foo singularity run rstudio-server-0.3.simg --auth-pam-helper-path /usr/lib/rstudio-server/bin/pam-helper --auth-none 0```
+     ```PASSWORD=foo singularity run /global/home/groups/consultsw/sl-7.x86_64/modules/rstudio-server-singularity/0.3/rstudio-server-0.3.simg --auth-pam-helper-path /usr/lib/rstudio-server/bin/pam-helper --auth-none 0```
   2) Note the name of the Savio node, e.g., `n0070.savio2` on which the job started.
   3) Login to the Savio visualization node, start a vncserver session, and connect to a VNC Viewer window (i.e., a remote desktop session) following [these instructions](https://research-it.berkeley.edu/services/high-performance-computing/using-brc-visualization-node-realvnc).
   4) From a terminal in the remote desktop session run the following (changing `n0070.savio2 as needed` to the node from step 2):
