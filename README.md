@@ -20,6 +20,8 @@ These steps are for when you want to have RStudio running on a compute node and 
   From a terminal in the remote desktop session run the following (changing `n0070.savio2` as needed to the node from step 2):
      - `firefox http://n0070.savio2:8787`
   5) When you are done with RStudio, make sure to kill your `srun` or `sbatch` session so you are not charged for time you don't need.
+  6) End your VNCserver session with:
+     - `vncserver -kill :<port number>`
  
 To run RStudio directly on the viz node, do this:
 
@@ -28,9 +30,10 @@ To run RStudio directly on the viz node, do this:
 
      ```singularity run /global/home/groups/consultsw/sl-7.x86_64/modules/rstudio-server-singularity/0.3/rstudio-server-0.3.simg```
   3) From a terminal in the remote desktop session, run:
-  From a terminal in the remote desktop session run the following:
-     - `firefox http://127.0.0.1:8787`
-  4) When you are done with RStudio, make sure to kill your `srun` or `sbatch` session so you are not charged for time you don't need.
+     - `firefox http://127.0.0.1:8787
+  4) End your VNCserver session with:
+     - `vncserver -kill :<port number>`
+
  
 Note that it's possible another user could connect to your RStudio session if you don't use authentication. 
 
