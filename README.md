@@ -9,18 +9,34 @@ This repository provides the materials needed to create a Singularity container 
 
 ### Using RStudio without authentication
 
+These steps are for when you want to have RStudio running on a compute node and viewed via the viz node:
+
   1) Start RStudio server on a compute node via `srun` or `sbatch` as follows.  If you're using `srun`, start your interactive session via `srun` and then invoke the Singularity command below. If you're using `sbatch`, invoke Singularity command below within your submission script. 
   
      ```singularity run /global/home/groups/consultsw/sl-7.x86_64/modules/rstudio-server-singularity/0.3/rstudio-server-0.3.simg```
   2) Note the name of the Savio node, e.g., `n0070.savio2` on which the job started.
   3) Login to the Savio visualization node, start a vncserver session, and connect to a VNC Viewer window (i.e., a remote desktop session) following [these instructions](https://research-it.berkeley.edu/services/high-performance-computing/using-brc-visualization-node-realvnc).
-  4) From a terminal in the remote desktop session run the following (changing `n0070.savio2` as needed to the node from step 2):
+  4) From a terminal in the remote desktop session (also fine to do in a terminal started via ssh), run:
+  From a terminal in the remote desktop session run the following (changing `n0070.savio2` as needed to the node from step 2):
      - `firefox http://n0070.savio2:8787`
   5) When you are done with RStudio, make sure to kill your `srun` or `sbatch` session so you are not charged for time you don't need.
+ 
+To run RStudio directly on the viz node, do this:
+
+  1) Login to the Savio visualization node, start a vncserver session, and connect to a VNC Viewer window (i.e., a remote desktop session) following [these instructions](https://research-it.berkeley.edu/services/high-performance-computing/using-brc-visualization-node-realvnc).
+  2) From a terminal in the remote desktop session (also fine to do in a terminal started via ssh), run the following:
+
+     ```singularity run /global/home/groups/consultsw/sl-7.x86_64/modules/rstudio-server-singularity/0.3/rstudio-server-0.3.simg```
+  3) From a terminal in the remote desktop session, run:
+  From a terminal in the remote desktop session run the following:
+     - `firefox http://127.0.0.1:8787`
+  4) When you are done with RStudio, make sure to kill your `srun` or `sbatch` session so you are not charged for time you don't need.
  
 Note that it's possible another user could connect to your RStudio session if you don't use authentication. 
 
 ### Using RStudio with authentication
+
+These instructions are for running RStudio on a compute node. If you want to run directly on the viz node, modify the steps below per the instructions in the previous section.
 
   1) Start RStudio server on a compute node via `srun` or `sbatch` as follows.  If you're using `srun`, start your interactive session via `srun` and then invoke the Singularity command below. If you're using `sbatch`, invoke Singularity command below within your submission script. You can set the password (here 'foo') to whatever you desire.
   
