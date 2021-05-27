@@ -1,6 +1,8 @@
 # savio-singularity-rstudio
 Materials for using (and creating) Singularity container for running RStudio server on Savio.
 
+NOTE: While this should still work, using RStudio via this approach on Savio should be unnecessary as of spring 2021. We now have Open OnDemand in place on Savio, providing a browser-based front-end to Savio on which you can run RStudio. Please go [here](https://ood.brc.berkeley.edu) and select RStudio Server on the Interactive Apps menu.
+
 ## Overview
 
 This repository provides the materials needed to create a Singularity container that provides an RStudio server session to run on a compute node (or on the viz node) and for the Savio user to connect to that RStudio session from the viz node. It builds on the Rocker Dockerfile for RStudio/RStudio server, modified such that the RStudio server can start when not running as root.
